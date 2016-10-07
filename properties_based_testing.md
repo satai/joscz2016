@@ -53,6 +53,92 @@ def "adding works"() {
 
 --
 
+# Make it radable
+
+```groovy
+def "adding works"() {
+    given:
+    	def adder = new Adder()
+    when:
+    	result = adder.add(27, 3)
+    then:
+    	30 == result
+}
+```
+--
+
+# Make it radable
+
+```groovy
+def "adding works"() {
+    given:
+        def adder = new Adder()
+    when:
+        result = adder.add(a, b)
+    then:
+        expectedResult == result
+    where:
+        a |  b || expectedResult
+        2 |  1 || 3
+        2 |  1 || 3
+        3 | 27 || 30
+}
+```
+--
+# Make the machine do the work
+
+```groovy
+def "adding is commutative"() {
+    given:
+        def adder = new Adder()
+    when:
+        result1 = adder.add(a, b)
+        result2 = adder.add(b, a)
+    then:
+        result1 == result2
+    where:
+        a |  b
+        2 |  1
+        0 |  1
+        3 | 27
+}
+```
+--
+# Make the machine do the work
+
+```groovy
+def "adding is commutative"() {
+    given:
+        def adder = new Adder()
+    when:
+        result1 = adder.add(a, b)
+        result2 = adder.add(b, a)
+    then:
+        result1 == result2
+    where:
+        a << [2, 0,  3]
+        b << [1, 1, 27]
+}
+```
+--
+# Make the machine do the work
+
+```groovy
+def "adding is commutative"() {
+    given:
+        def adder = new Adder()
+    when:
+        result1 = adder.add(a, b)
+        result2 = adder.add(b, a)
+    then:
+        result1 == result2
+    where:
+        a << *MAGIC*
+        b << *MAGIC*
+}
+```
+--
+
 # What is next next
 
 * we can see
